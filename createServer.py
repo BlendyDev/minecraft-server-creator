@@ -2,6 +2,8 @@ import requests
 import platform
 import download
 import json
+from os.path import exists
+
 versions = ["1.19", "1.18.2", "1.17.1", "1.16.5", "1.15.2", "1.14.4", "1.13.2", "1.12.2", "1.11.2", "1.10.2", "1.9.4", "1.8.8"]
 files = ["vanilla", "paper","fabric", "forge"]
 softwares = ["Vanilla", "Paper", "Fabric", "Forge"]
@@ -57,5 +59,10 @@ def menu():
         print("Invalid Option")
         chosenSw = int(input("Please enter id: "))
     downloadSoftware(chosenSw-1)
+    
+if (not exists("eula.txt")):
+    input("This program will auto-agree to the Minecraft EULA (https://aka.ms/MinecraftEULA). If you don't agree with it please halt this program.\n[PRESS ENTER TO CONTINUE AND IGNORE THIS WARNING FOR FUTURE USES]\n")
+    ignoreWarning = open("eula.txt", "w")
+    ignoreWarning.close()
             
 menu()

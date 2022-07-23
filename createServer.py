@@ -1,11 +1,26 @@
-import requests
+import os
+
+try:
+    import requests
+    import download
+except ModuleNotFoundError:
+    os.system("pip install requests")
+    os.system("pip install download")
+    import requests
+    import download
 import platform
-import download
 import json
 from os.path import exists
-
+os.mkdir("Server")
+os.chidr("Server")
 versions = ["1.19", "1.18.2", "1.17.1", "1.16.5", "1.15.2", "1.14.4", "1.13.2", "1.12.2", "1.11.2", "1.10.2", "1.9.4", "1.8.8"]
 files = ["vanilla", "paper","fabric", "forge"]
+link = {
+    "fabric": "https://pastebin.com/raw/i0r1x3Ge",
+    "paper": "https://pastebin.com/raw/cBRcky4v",
+    "vanilla": "https://pastebin.com/raw/4BvyFw4M",
+    "forge": "https://pastebin.com/raw/eRu7CUH9"
+}
 softwares = ["Vanilla", "Paper", "Fabric", "Forge"]
 
 def setup():
@@ -13,19 +28,19 @@ def setup():
     RAM = input("Enter Amount of ram in GB: ")
     RAM = int(RAM)
     if platform.system() == "Windows":
-        sb = open("../start.bat", "w")
+        sb = open("start.bat", "w")
     else:
-        sb = open("../start.sh", "w")
+        sb = open("start.sh", "w")
         sb.write("#!/bin/sh\n")
-    sb.write(f"java -Xmx{RAM}G -jar Server.jar --nogui")
+    sb.write(f"java -Xmx{RAM}G -jar Server.jar")
     sb.close()
-    eula = open("../eula.txt", "w")
+    eula = open("eula.txt", "w")
     eula.write("eula=true")
     eula.close()
     
 def downloadSoftware(index):
     #Software chooser
-    f = open("json/" + files[index] + ".json")
+    f = link[index]
     data = json.load(f)
     print("")
     print("*"*20)
@@ -42,7 +57,7 @@ def downloadSoftware(index):
         verid = int(input("Enter id: "))
     v = data[versions[verid-1]]
     setup()
-    download.download(v, "../Server.jar")
+    download.download(v, "Server.jar")
     f.close()   
     print("Server successfully setup!")
     

@@ -69,7 +69,7 @@ def menu():
         print(f"{i} # {sw}")
         i = i+1
     print("*"*20)
-    chosenSw = int(input("Please entesr id: "))
+    chosenSw = int(input("Please enter id: "))
     while (not (chosenSw > 0 and chosenSw <= len(softwares))): 
         print("Invalid Option")
         chosenSw = int(input("Please enter id: "))

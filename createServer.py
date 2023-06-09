@@ -17,7 +17,7 @@ def setup():
     else:
         sb = open("../start.sh", "w")
         sb.write("#!/bin/sh\n")
-    sb.write(f"java -Xmx{RAM}G -jar Server.jar --nogui")
+    sb.write(f"java -Xmx{RAM}G -jar Server.jar")
     sb.close()
     eula = open("../eula.txt", "w")
     eula.write("eula=true")

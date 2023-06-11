@@ -4,7 +4,6 @@ import download
 import json
 from os.path import exists
 
-versions = ["1.19", "1.18.2", "1.17.1", "1.16.5", "1.15.2", "1.14.4", "1.13.2", "1.12.2", "1.11.2", "1.10.2", "1.9.4", "1.8.8"]
 files = ["vanilla", "paper","fabric", "forge"]
 softwares = ["Vanilla", "Paper", "Fabric", "Forge"]
 
@@ -40,7 +39,7 @@ def downloadSoftware(index):
     while (not (verid > 0 and verid <= len(data["Versions"]))):
         print("Invalid Option")
         verid = int(input("Enter id: "))
-    v = data[versions[verid-1]]
+    v = data[data["Versions"][verid-1]]
     setup()
     download.download(v, "../Server.jar")
     f.close()   
